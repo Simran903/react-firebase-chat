@@ -1,3 +1,115 @@
 .detail{
     flex: 1;
+
+    .user{
+        padding: 20px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        border-bottom: 1px solid #dddddd35;
+        color: white;
+
+        img{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        h2{
+            font-size: 25px;
+        }
+
+        p{
+            font-size: 14px;
+        }
+    }
+
+    .info{
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        .option{
+
+            .title{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                color: white;
+
+                img{
+                    width: 30px;
+                    height: 30px;
+                    background-color: rgba(17, 25, 40, 0.3);
+                    padding: 10px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                }
+            }
+
+            .photos{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 5px;
+                
+                .photoItem{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .photoDetail{
+                        display: flex;
+                        align-items: center;
+                        gap: 20px;
+
+                        img{
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 5px;
+                            object-fit: fill;
+                        }
+
+                        span{
+                            font-size: 11px;
+                            font-weight: 300;
+                            color: lightgray;
+                        }
+                    }
+
+                    .icon{
+                        width: 30px;
+                        height: 30px;
+                        cursor: pointer;
+                        padding: 10px;
+                        border-radius: 50%;
+                        background-color: rgba(17, 25, 40, 0.3);
+                    }
+                }
+
+                
+            }
+
+        }
+        button{
+            padding: 10px 20px;
+            color: white;
+            background-color: rgba(230, 74,105, 0.553);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &:hover{
+                background-color: rgba(220, 20 ,60, 0.796);
+            }
+
+            &.logOut{
+                padding: 10px;
+                background-color: #1a73e8;
+            }
+        }
+    }
 }

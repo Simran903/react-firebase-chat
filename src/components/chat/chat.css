@@ -26,17 +26,17 @@
                 object-fit: cover;
             }
 
-            .texts{
+            .texts {
                 display: flex;
                 flex-direction: column;
                 gap: 5px;
 
-                span{
+                span {
                     font-size: 18px;
                     font-weight: bold;
                 }
 
-                p{
+                p {
                     font-size: 14px;
                     font-weight: 300;
                     color: #a5a5a5;
@@ -44,43 +44,101 @@
             }
         }
 
-        .icons{
-            display: flex;gap: 20px;
+        .icons {
+            display: flex;
+            gap: 20px;
         }
 
-        img{
-           width: 20px;
-           height: 20px; 
+        img {
+            width: 20px;
+            height: 20px;
         }
     }
 
-    .center{
+    .center {
         padding: 20px;
         flex: 1;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .message {
+            max-width: 70%;
+            display: flex;
+            gap: 20px;
+
+            &.own {
+                align-self: flex-end;
+
+                .text {
+                    p {
+                        background-color: #5183fe;
+                        border-radius: 20px;
+                        border-bottom-right-radius: 0;
+                    }
+
+                    span{
+                        align-self: flex-end;
+                    }
+                }
+            }
+
+            img{
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            .text{
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+
+                img{
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 10px;
+                    object-fit: cover;
+                }
+
+                p{
+                    padding: 20px;
+                    background-color: rgba(17, 25, 40);
+                    border-radius: 20px;
+                    border-top-left-radius: 0;
+                }
+
+                span{
+                    font-size: 10px;
+                }
+            }
+        }
     }
 
-    .bottom{
+    .bottom {
         padding: 15px 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         border-top: 1px solid #dddddd35;
         gap: 20px;
-        
+
         margin-top: auto;
 
-        .icons{
+        .icons {
             display: flex;
             gap: 20px;
         }
-        
-        img{
+
+        img {
             width: 20px;
             height: 20px;
             cursor: pointer;
         }
 
-        input{
+        input {
             flex: 1;
             border: none;
             outline: none;
@@ -90,10 +148,10 @@
             border-radius: 16px;
         }
 
-        .emoji{
+        .emoji {
             position: relative;
 
-            .picker{
+            .picker {
                 position: absolute;
                 bottom: 50px;
                 left: 0;
@@ -101,9 +159,9 @@
             }
         }
 
-        
 
-        .sendButton{
+
+        .sendButton {
             background-color: #5183fe;
             color: white;
             padding: 10px 20px;

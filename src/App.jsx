@@ -1,13 +1,14 @@
-import Chat from "./components/chat/Chat"
-import Detail from "./components/detail/Detail"
-import List from "./components/list/List"
+import Login from "./components/login/Login"
+import Register from "./components/login/Register"
+import Home from "./pages/Home"
 
 const App = () => {
+
   return (
-    <div className='container'>
-      <List />
-      <Chat />
-      <Detail />
+    <div>
+      <Login />
+      {/* <Register /> */}
+      {/* <Home /> */}
     </div>
   )
 }
