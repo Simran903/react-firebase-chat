@@ -1,9 +1,16 @@
 import React from 'react'
-import hero from "./../../../public/hero.png"
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom';
+import hero from "./../../../public/hero.png"
 import './login.css'
 
 const Login = () => {
+    const navigate = useNavigate();
+
+    const handleSignUpClick = () => {
+        navigate("/register");
+    }
+
     return (
         <div class="loginContainer">
             <div className="">
@@ -30,7 +37,6 @@ const Login = () => {
                         <span className='subTitle'>Login</span>
                         <form className='loginForm'>
                             <input type="text" placeholder='Username' />
-                            
                             <input type="password" placeholder='Password' />
 
                             <motion.div
@@ -38,14 +44,13 @@ const Login = () => {
                                 whileHover={{ scale: 1.1 }}
                                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
                             >
-
                                 <div className="buttonContainer">
                                     <button>Login in</button>
                                 </div>
                             </motion.div>
 
                         </form>
-                        <p className='mt-6 text-sm bg-gradient-to-r from-fuchsia-600 to-pink-600 text-transparent inline-block bg-clip-text'>Don't have an account? <a href="">Sign up</a></p>
+                        <p className='mt-6 text-sm bg-gradient-to-r from-fuchsia-600 to-pink-600 text-transparent inline-block bg-clip-text'>Don't have an account? <a onClick={handleSignUpClick}>Sign up</a></p>
                     </div>
                 </motion.div>
             </div>

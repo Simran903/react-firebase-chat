@@ -12,6 +12,7 @@ body{
   display: flex;
   align-items: center;
   height: 100vh;
+  justify-content: center;
 }
 
 ::-webkit-scrollbar {
@@ -41,5 +42,6 @@ body{
   backdrop-filter: blur(5px) saturate(120%);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.5);
+  justify-content: center;
 }
 

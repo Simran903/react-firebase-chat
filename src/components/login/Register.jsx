@@ -1,9 +1,16 @@
 import React from "react";
-import hero from "./../../../public/hero.png";
 import { motion } from "framer-motion";
+import { useNavigate } from 'react-router-dom';
+import hero from "./../../../public/hero.png";
 import "./login.css";
 
 const Register = () => {
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate("/login");
+  }
+
   return (
     <div class="loginContainer">
       <div className="">
@@ -45,7 +52,7 @@ const Register = () => {
               </motion.div>
             </form>
             <p className="mt-6 text-sm bg-gradient-to-r from-fuchsia-600 to-pink-600 text-transparent inline-block bg-clip-text">
-              Already have an account? <a href="">Log in</a>
+              Already have an account? <a onClick={handleLoginClick}>Log in</a>
             </p>
           </div>
         </motion.div>
