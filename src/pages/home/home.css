@@ -1,0 +1,34 @@
+.homeContainer {
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    background-repeat: round;
+    object-fit: fill;
+    display: flex;
+    align-items: center;
+
+    .content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img{
+            height: 500px;
+            width: 700px;
+        }
+
+        .heading{
+
+            h1{
+                font-weight: 600;
+                font-size: 60px;
+            }
+
+            p{
+                font-size: 15px;
+                margin-top: 10px;
+            }
+        }
+        
+    }
+}

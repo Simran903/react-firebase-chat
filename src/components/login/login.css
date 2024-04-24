@@ -24,6 +24,10 @@
         background-color: #002D62;
     }
 
+    img{
+        margin-left: 80px;
+    }
+
 
     .login-box {
         margin-top: 2rem;

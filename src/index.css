@@ -11,7 +11,6 @@ body{
   background-repeat: round;
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 100vh;
 }
 
@@ -43,3 +42,4 @@ body{
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
+
