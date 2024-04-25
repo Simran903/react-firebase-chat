@@ -3,6 +3,12 @@ import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import hero from "./../../../public/hero.png";
 import "./login.css";
+import { toast } from "react-toastify";
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth, db } from '../../lib/firebase';
+import { doc, setDoc } from "firebase/firestore";
+import upload from "../../lib/upload";
+
 
 const Register = () => {
   const [avatar, setAvatar] = useState({
@@ -10,6 +16,40 @@ const Register = () => {
     url: ""
   })
   const navigate = useNavigate();
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target)
+
+    const {username, email, password} = Object.fromEntries(formData)
+
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password)
+      const imgUrl = await upload(avatar.file)
+
+      await setDoc(doc(db, "users", res.user.uid), {
+        username,
+        email,
+        avatar: imgUrl,
+        id: res.user.uid,
+        blocked: []
+      })
+  
+      await setDoc(doc(db, "userChats", res.user.uid), {
+        chats: [],
+  
+      })
+  
+      toast.success("Accound created successfully")
+      navigate('/login')
+
+      
+    } catch (error) {
+      console.log(error.message)
+      toast.error(error.message)
+    }
+
+  }
 
   const handleAvatar = (e) => {
     if (e.target.files[0]) {
@@ -25,7 +65,7 @@ const Register = () => {
   }
 
   return (
-    <div class="loginContainer">
+    <div className="loginContainer">
       <div className="">
         <img src={hero} alt="" width="695px" height="695px" />
       </div>
@@ -49,10 +89,10 @@ const Register = () => {
             <span className="title">ChitChat</span>
             <br />
             <span className="subTitle">Register</span>
-            <form className="loginForm">
-              <input type="text" placeholder="Username" />
-              <input type="email" placeholder='Email' />
-              <input type="password" placeholder="Password" />
+            <form className="loginForm" onSubmit={handleRegister}>
+              <input type="text" placeholder="Username" name="username" />
+              <input type="email" placeholder='Email' name="email" />
+              <input type="password" placeholder="Password" name="password" />
               <div className="avatarContainer">
                 <input className="avatar" type="file" id="avatar" onChange={handleAvatar} />
                 <label htmlFor="avatar">
