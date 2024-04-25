@@ -3,12 +3,18 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom';
 import hero from "./../../../public/hero.png"
 import './login.css'
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const navigate = useNavigate();
 
     const handleSignUpClick = () => {
         navigate("/register");
+    }
+
+    const handleLogin = e => {
+        e.preventDefault();
+        toast.warn('Hello')
     }
 
     return (
@@ -35,7 +41,7 @@ const Login = () => {
                         <span className='title'>ChitChat</span>
                         <br />
                         <span className='subTitle'>Login</span>
-                        <form className='loginForm'>
+                        <form className='loginForm' onSubmit={handleLogin}>
                             <input type="text" placeholder='Username' />
                             <input type="password" placeholder='Password' />
 

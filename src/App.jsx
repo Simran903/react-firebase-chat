@@ -1,6 +1,7 @@
 import Login from "./components/login/Login"
 import Register from "./components/login/Register"
 import Header from "./components/navbar/Navbar"
+import Notification from "./components/notification/Notification"
 import ChatApp from "./pages/ChatApp"
 import Home from "./pages/home/Home"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -32,6 +33,7 @@ const App = () => {
           element={<Register />}
         />
       </Routes>
+      <Notification />
     </BrowserRouter>
   )
 }
