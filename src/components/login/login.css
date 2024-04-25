@@ -9,8 +9,9 @@
 
 
     .inner-container {
+        
         border: 2px solid skyblue;
-        height: 400px;
+        height: 500px;
         width: 450px;
         margin-top: 3.5rem;
         margin-left: 9rem;
@@ -22,6 +23,10 @@
             0 0 15px #08f,
             0 0 30px #08f;
         background-color: #002D62;
+
+        &.login{
+            height: 400px;
+        }
     }
 
 
@@ -56,6 +61,32 @@
                 width: 90%;
                 margin: auto;
             }
+
+            .avatarContainer{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img{
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+                
+                .avatar{
+                    visibility: hidden;
+                    display: none;
+                }
+
+                label{
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+            }
+
 
             .buttonContainer {
                 display: flex;

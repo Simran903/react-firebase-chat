@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import hero from "./../../../public/hero.png";
 import "./login.css";
 
 const Register = () => {
+  const [avatar, setAvatar] = useState({
+    file: null,
+    url: ""
+  })
   const navigate = useNavigate();
+
+  const handleAvatar = (e) => {
+    if (e.target.files[0]) {
+      setAvatar({
+        file: e.target.files[0],
+        url: URL.createObjectURL(e.target.files[0])
+      })
+    }
+  }
 
   const handleLoginClick = () => {
     navigate("/login");
@@ -40,6 +53,11 @@ const Register = () => {
               <input type="text" placeholder="Username" />
               <input type="email" placeholder='Email' />
               <input type="password" placeholder="Password" />
+              <div className="avatarContainer">
+                <input className="avatar" type="file" id="avatar" onChange={handleAvatar} />
+                <label htmlFor="avatar">
+                  <img src={avatar.url || "./avatar.png"} alt="" />Upload your photo</label>
+              </div>
 
               <motion.div
                 className="box"

@@ -16,7 +16,7 @@ const Login = () => {
             <div className="">
                 <img src={hero} alt="" width='695px' height='695px' />
             </div>
-            <div className="inner-container" >
+            <div className="inner-container login" >
                 <motion.div
                     className="box"
                     initial={{ opacity: 0, scale: 0.7 }}
