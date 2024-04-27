@@ -2,28 +2,27 @@ import React, { useEffect, useRef, useState } from 'react'
 import './chat.css'
 import EmojiPicker from 'emoji-picker-react'
 import { AiOutlineBgColors } from 'react-icons/ai';
+import useUserStore from '../../lib/userStore'; // Import the useUserStore
 
 const Chat = () => {
-  const [open, setOpen] = useState(false);
-  const [text, setText] = useState('');
-  const [color, setColor] = useState(localStorage.getItem('messageColor') || "#5183fe"); // State for message background color
+  const [open, setOpen] = useState(false)
+  const [text, setText] = useState('')
+  const { color, setColor } = useUserStore(); // Destructure only color and setColor from useUserStore
 
-  const endRef = useRef(null);
+  const endRef = useRef(null)
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, []);
-  
+    endRef.current?.scrollIntoView({behavior: 'smooth'})
+  }, [])
+
   const handleEmoji = (e) => {
-    setText((prev) => prev + e.emoji);
-    setOpen(false);
-  };
+    setText((prev) => prev + e.emoji)
+    setOpen(false)
+  }
 
   const handleColorChange = (e) => {
-    const selectedColor = e.target.value;
-    setColor(selectedColor);
-    localStorage.setItem('messageColor', selectedColor); // Store color preference in local storage
-  };
+    setColor(e.target.value);
+  }
 
   return (
     <div className='chat'>
@@ -42,13 +41,7 @@ const Chat = () => {
         </div>
       </div>
       <div className="center">
-        <div className="message own">
-          <div className="text">
-            <p style={{ backgroundColor: color }}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
-            <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="message">
+      <div className="message">
           <div className="text">
             <p style={{ backgroundColor: color }}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
             <span>1 min ago</span>
@@ -72,13 +65,12 @@ const Chat = () => {
             <span>1 min ago</span>
           </div>
         </div>
-        <div className="message">
+        <div className="message own">
           <div className="text">
             <p style={{ backgroundColor: color }}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
             <span>1 min ago</span>
           </div>
         </div>
-        {/* Other messages */}
         <div ref={endRef}></div>
       </div>
       <div className="bottom">
@@ -101,7 +93,7 @@ const Chat = () => {
         </button>
       </div>
     </div>
-  );
+  )
 }
 
 export default Chat;
