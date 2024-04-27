@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
-import hero from "./../../../public/hero.png";
 import "./login.css";
 import { toast } from "react-toastify";
 import { createUserWithEmailAndPassword } from 'firebase/auth'
@@ -67,7 +66,7 @@ const Register = () => {
   return (
     <div className="loginContainer">
       <div className="">
-        <img src={hero} alt="" width="695px" height="695px" />
+        <img src="./hero.png" alt="" width="695px" height="695px" />
       </div>
       <div className="inner-container">
         <motion.div

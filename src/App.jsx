@@ -8,20 +8,26 @@ import Home from "./pages/home/Home"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { onAuthStateChanged } from "firebase/auth"
 import { auth } from "./lib/firebase"
+import useUserStore from "./lib/userStore"
 
 const App = () => {
 
+  const {currentUser, isLoading, fetchUserInfo} = useUserStore()
+
   useEffect(() => {
     const onSub = onAuthStateChanged(auth, (user) => {
-      console.log(user)
+      fetchUserInfo(user?.uid)
     })
 
     return () => {
       onSub()
     }
   
-  }, [])
+  }, [fetchUserInfo])
+
+  if (isLoading) return <div className="loading">Loading...</div>
   
+  console.log(currentUser)
 
   return (
     <BrowserRouter>

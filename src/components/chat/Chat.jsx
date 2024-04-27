@@ -1,22 +1,29 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './chat.css'
 import EmojiPicker from 'emoji-picker-react'
+import { AiOutlineBgColors } from 'react-icons/ai';
 
 const Chat = () => {
-  const [open, setOpen] = useState(false)
-  const [text, setText] = useState('')
-  const endRef = useRef(null)
+  const [open, setOpen] = useState(false);
+  const [text, setText] = useState('');
+  const [color, setColor] = useState(localStorage.getItem('messageColor') || "#5183fe"); // State for message background color
+
+  const endRef = useRef(null);
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({behavior: 'smooth'})
+    endRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
   
-  }, [])
-  
-
   const handleEmoji = (e) => {
-    setText((prev) => prev + e.emoji)
-    setOpen(false)
-  }
+    setText((prev) => prev + e.emoji);
+    setOpen(false);
+  };
+
+  const handleColorChange = (e) => {
+    const selectedColor = e.target.value;
+    setColor(selectedColor);
+    localStorage.setItem('messageColor', selectedColor); // Store color preference in local storage
+  };
 
   return (
     <div className='chat'>
@@ -24,7 +31,7 @@ const Chat = () => {
         <div className="user">
           <img src="./avatar.png" alt="" />
           <div className="texts">
-            <span>Jane Doe</span>
+            <span style={{ color: color }}>Jane Doe</span>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
           </div>
         </div>
@@ -37,63 +44,41 @@ const Chat = () => {
       <div className="center">
         <div className="message own">
           <div className="text">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
-          <span>1 min ago</span>
+            <p style={{ backgroundColor: color }}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
+            <span>1 min ago</span>
           </div>
         </div>
         <div className="message">
-          <img src="./avatar.png" alt="" />
           <div className="text">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
-          <span>1 min ago</span>
+            <p style={{ backgroundColor: color }}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
+            <span>1 min ago</span>
           </div>
         </div>
         <div className="message own">
           <div className="text">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
-          <span>1 min ago</span>
+            <p style={{ backgroundColor: color }}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
+            <span>1 min ago</span>
           </div>
         </div>
         <div className="message">
-          <img src="./avatar.png" alt="" />
           <div className="text">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
-          <span>1 min ago</span>
+            <p style={{ backgroundColor: color }}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
+            <span>1 min ago</span>
           </div>
         </div>
         <div className="message own">
           <div className="text">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
-          <span>1 min ago</span>
+            <p style={{ backgroundColor: color }}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
+            <span>1 min ago</span>
           </div>
         </div>
         <div className="message">
-          <img src="./avatar.png" alt="" />
           <div className="text">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
-          <span>1 min ago</span>
+            <p style={{ backgroundColor: color }}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
+            <span>1 min ago</span>
           </div>
         </div>
-        <div className="message own">
-          <div className="text">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
-          <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="message">
-          <img src="./avatar.png" alt="" />
-          <div className="text">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
-          <span>1 min ago</span>
-          </div>
-        </div>
-        <div className="message own">
-          <div className="text">
-            <img src="https://images.unsplash.com/photo-1713714614660-18a216d92281?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8" alt="" />
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, minima.</p>
-          <span>1 min ago</span>
-          </div>
-        </div>
+        {/* Other messages */}
         <div ref={endRef}></div>
       </div>
       <div className="bottom">
@@ -103,6 +88,8 @@ const Chat = () => {
           <img src="./mic.png" alt="" />
         </div>
         <input type="text" placeholder='Type a message...' value={text} onChange={(e) => setText(e.target.value)} />
+        <input type="color" value={color} onChange={handleColorChange} name='color' id='color' className='colorPicker' />
+        <label htmlFor="color"><AiOutlineBgColors className='colorIcon' /></label>
         <div className="emoji">
           <img src="./emoji.png" alt="" onClick={() => setOpen((prev) => !prev)} />
           <div className="picker">
@@ -112,10 +99,9 @@ const Chat = () => {
         <button className='sendButton'>
           Send
         </button>
-
       </div>
     </div>
-  )
+  );
 }
 
-export default Chat
+export default Chat;

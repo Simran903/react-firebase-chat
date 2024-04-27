@@ -45,3 +45,9 @@ body{
   justify-content: center;
 }
 
+.loading{
+  padding: 40px;
+  font-size: 32px;
+  border-radius: 20px;
+  background-color: rgb(127, 155, 208);
+}

@@ -148,6 +148,30 @@
             border-radius: 16px;
         }
 
+        .colorPicker {
+            display: none; /* Hide the color picker */
+          }
+      
+          label {
+            position: relative; /* Position the label relative to its container */
+          }
+      
+          .colorIcon {
+            font-size: 24px;
+            cursor: pointer;
+          }
+      
+          label:hover .colorPicker {
+            display: block; /* Display the color picker when the label is hovered */
+            position: absolute;
+            bottom: -40px; /* Adjust the position as needed */
+            left: 50%; /* Adjust the position as needed */
+            transform: translateX(-50%); /* Center the color picker horizontally */
+            z-index: 1;
+          }
+
+        
+
         .emoji {
             position: relative;
 
