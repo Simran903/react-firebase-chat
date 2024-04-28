@@ -4,35 +4,40 @@ import AddUser from './adduser/AddUser'
 import useUserStore from '../../../lib/userStore'
 import { doc, getDoc, onSnapshot } from 'firebase/firestore'
 import { db } from '../../../lib/firebase'
+import useChatStore from '../../../lib/chatStore'
 
 const ChatList = () => {
   const [addMode, setAddMode] = useState(false)
   const [chats, setChats] = useState([]);
   const { currentUser } = useUserStore();
+  const { chatId, changeChat } = useChatStore();
 
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "userChats", currentUser.id), async (res) => {
-      const items = res.data().chats
-
-      const promises = items.map(async (item) => {
-        const userDocRef = doc(db, "users", item.receiverId)
-        const userDocSnap = getDoc(userDocRef)
-
-        const user = userDocSnap.data()
-
-        return {...item, user}
-      })
-
-      const chatData = await Promise.all(promises)
-
-      setChats(chatData)?.sort((a,b) => b.updatedAt - a.updatedAt)
+      const data = res.data();
+      if (data && Array.isArray(data.chats)) {
+        const items = data.chats.map(async (item) => {
+          const userDocRef = doc(db, "users", item.receiverId)
+          const userDocSnap = await getDoc(userDocRef)
+          const user = userDocSnap.data()
+          return { ...item, user }
+        })
+  
+        const chatData = await Promise.all(items);
+        setChats(chatData.sort((a, b) => b.updatedAt - a.updatedAt));
+      } else {
+        setChats([]);
+      }
     });
-
+  
     return () => {
       unSub();
     };
   }, [currentUser.id]);
 
+  const handleSelect = async (chat) => {
+    changeChat(chat.chatId, chat.user)
+  }
 
   return (
     <div className='chatList'>
@@ -44,10 +49,10 @@ const ChatList = () => {
         <img onClick={() => setAddMode((prev) => !prev)} src={addMode ? "./minus.png" : "./plus.png"} alt="" className='add' />
       </div>
       {chats.map((chat) => (
-        <div key={chat.chatId} className="item">
-          <img src="./avatar.png" alt="" />
+        <div key={chat.chatId} className="item" onClick={() => handleSelect(chat)}>
+          <img src={chat.user.avatar || "./avatar.png"} alt="" />
           <div className="texts">
-            <span>JaneDoe</span>
+            <span>{chat.user.username}</span>
             <p>{chat.lastMessage}</p>
           </div>
         </div>

@@ -11,18 +11,18 @@ const AddUser = () => {
 
   const handleAdd = async () => {
     if (!user) return;
-
+    
     const chatRef = collection(db, "chats");
-    const userChatsRef = collection(db, "userchats");
-
+    const userChatsRef = collection(db, "userChats");
+    
     try {
       const newChatRef = doc(chatRef);
-      
+        
       await setDoc(newChatRef, {
         createdAt: serverTimestamp(),
         messages: []
       });
-      
+        
       // Update user's chat list
       await updateDoc(doc(userChatsRef, user.id), {
         chats: arrayUnion({
@@ -32,7 +32,7 @@ const AddUser = () => {
           updatedAt: Date.now()
         })
       });
-
+  
       await updateDoc(doc(userChatsRef, currentUser.id), {
         chats: arrayUnion({
           chatId: newChatRef.id,
@@ -41,12 +41,13 @@ const AddUser = () => {
           updatedAt: Date.now()
         })
       });
-
-      console.log(newChatRef.id);
+  
+      // console.log(newChatRef.id);
     } catch (error) {
       console.error(error);
     }
   };
+    
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -60,9 +61,7 @@ const AddUser = () => {
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {
-        querySnapshot.forEach((doc) => {
-          setUser({ id: doc.id, ...doc.data() }); // Store user id along with data
-        });
+        setUser(querySnapshot.docs[0].data())
       } else {
         setUser(null);
       }
