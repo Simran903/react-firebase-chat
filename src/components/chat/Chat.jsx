@@ -118,13 +118,35 @@ const Chat = () => {
     setText("");
   };
 
+  const formatTime = (timestamp) => {
+    if (!timestamp) return ""; // Return empty string if timestamp is undefined or null
+  
+    // Convert Firestore timestamp to JavaScript Date object
+    const date = timestamp.toDate();
+    const now = new Date();
+  
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.round(diffMs / (1000 * 60));
+    const diffHours = Math.round(diffMins / 60);
+    const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+  
+    if (diffDays > 0) {
+      return `${diffDays} days ago`;
+    } else if (diffHours > 1) {
+      return `${diffHours} hours ago`;
+    } else {
+      return `${diffMins} mins ago`;
+    }
+  };
+  
+
   return (
     <div className="chat">
       <div className="top">
         <div className="user">
-          <img src={user.avatar || "./avatar.png"} alt="" />
+          <img src={user?.avatar || "./avatar.png"} alt="" />
           <div className="texts">
-            <span style={{ color: color }}>{user.username}</span>
+            <span style={{ color: color }}>{user?.username}</span>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
           </div>
         </div>
@@ -137,18 +159,20 @@ const Chat = () => {
 
       <div className="center">
         {chat?.messages?.map((message) => (
-          <div
-            className={
-              message.senderId === currentUser?.id ? "message own" : "message"
-            }
-            key={message?.createdAt}
-          >
-            <div className="text">
-              {message?.img && <img src={message?.img} alt="" />}
-              <p style={{ backgroundColor: color }}>{message.text}</p>
-              {/* <span>{message.createdAt}</span> */}
+          ((!isCurrentUserBlocked && !isReceiverBlocked) || message.senderId === currentUser.id) && (
+            <div
+              className={
+                message.senderId === currentUser?.id ? "message own" : "message"
+              }
+              key={message?.createdAt}
+            >
+              <div className="text">
+                {message?.img && <img src={message?.img} alt="" />}
+                <p style={{ backgroundColor: color }}>{message.text}</p>
+                <span>{formatTime(message?.createdAt)}</span> {/* Use formatTime function */}
+              </div>
             </div>
-          </div>
+          )
         ))}
         {img.url && (
           <div className="message own">
@@ -211,4 +235,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default Chat

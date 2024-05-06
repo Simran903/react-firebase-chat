@@ -47,6 +47,7 @@
         .icons {
             display: flex;
             gap: 20px;
+            position: relative; /* Added */
         }
 
         img {
@@ -130,6 +131,7 @@
         .icons {
             display: flex;
             gap: 20px;
+            position: relative; /* Added */
         }
 
         img {
@@ -153,11 +155,16 @@
         }
 
         .colorPicker {
-            display: none; /* Hide the color picker */
+            visibility: hidden;
+            position: absolute;
+            bottom: 50px;
+            left: 60%;
+            background-color: white; /* Added for better visibility */
+            padding: 10px; /* Added for better visibility */
           }
       
           label {
-            position: relative; /* Position the label relative to its container */
+            position: relative;
           }
       
           .colorIcon {
@@ -166,15 +173,8 @@
           }
       
           label:hover .colorPicker {
-            display: block; /* Display the color picker when the label is hovered */
-            position: absolute;
-            bottom: -40px; /* Adjust the position as needed */
-            left: 50%; /* Adjust the position as needed */
-            transform: translateX(-50%); /* Center the color picker horizontally */
-            z-index: 1;
+            display: block;
           }
-
-        
 
         .emoji {
             position: relative;

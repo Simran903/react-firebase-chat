@@ -24,21 +24,21 @@ const Detail = () => {
 
     try {
       await updateDoc(userDocRef, {
-        blocked: isReceiverBlocked ? arrayRemove(user.id) : arrayUnion(user.id)
+        blocked: isReceiverBlocked ? arrayRemove(user.id) : arrayUnion(user.id),
       })
-      toast.success("Blocked successfully")
-      changeBlock()
+      changeBlock();
+      toast.success(isReceiverBlocked ? "User unblocked successfully" : "User blocked successfully");
     } catch (error) {
       console.log(error)
+      toast.error("Failed to update block status");
     }
-
   }
 
   return (
     <div className='detail'>
       <div className="user">
-        <img src={user.avatar || "./avatar.png"} alt="" />
-        <h2>{user.username}</h2>
+        <img src={user?.avatar || "./avatar.png"} alt="" />
+        <h2>{user?.username}</h2>
         <p>Lorem ipsum dolor sit amet.</p>
       </div>
       <div className="info">
@@ -66,21 +66,18 @@ const Detail = () => {
                 <img src="https://images.unsplash.com/photo-1713526721814-412688ede906?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8fA%3D%3D" alt="" />
                 <span>photo_2024.png</span>
               </div>
-              <img src="./download.png" alt="" className='icon' />
             </div>
             <div className="photoItem">
               <div className="photoDetail">
                 <img src="https://images.unsplash.com/photo-1713526721814-412688ede906?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8fA%3D%3D" alt="" />
                 <span>photo_2024.png</span>
               </div>
-              <img src="./download.png" alt="" className='icon' />
             </div>
             <div className="photoItem">
               <div className="photoDetail">
                 <img src="https://images.unsplash.com/photo-1713526721814-412688ede906?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8fA%3D%3D" alt="" />
                 <span>photo_2024.png</span>
               </div>
-              <img src="./download.png" alt="" className='icon' />
             </div>
           </div>
           
