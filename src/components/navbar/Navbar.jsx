@@ -43,7 +43,7 @@ const Header = () => {
     return (
         <header className={`header ${show}`}>
             <div className="logo" onClick={() => navigate("/")}>
-                <h2>ChatApp</h2>
+                <h2>ChitChat</h2>
             </div>
             <ul className="menuItems">
                 <li className="menuItem" onClick={() => navigationHandler("login")}>Log in</li>
