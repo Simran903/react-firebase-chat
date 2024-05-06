@@ -64,7 +64,7 @@ const Login = () => {
                                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
                             >
                                 <div className="buttonContainer">
-                                    <button>Login in</button>
+                                    <button>Login</button>
                                 </div>
                             </motion.div>
 
