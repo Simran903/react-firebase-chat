@@ -32,7 +32,7 @@ const Login = () => {
 
     return (
         <div className="loginContainer">
-            <div className="">
+            <div className="heroImg">
                 <img src="./hero.png" alt="" width='695px' height='695px' />
             </div>
             <div className="inner-container login" >
