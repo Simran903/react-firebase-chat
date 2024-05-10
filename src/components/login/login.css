@@ -9,7 +9,7 @@
 
 
     .inner-container {
-        
+
         border: 2px solid skyblue;
         height: 500px;
         width: 450px;
@@ -24,7 +24,7 @@
             0 0 30px #08f;
         background-color: #002D62;
 
-        &.login{
+        &.login {
             height: 400px;
         }
     }
@@ -62,24 +62,24 @@
                 margin: auto;
             }
 
-            .avatarContainer{
+            .avatarContainer {
                 display: flex;
                 justify-content: center;
                 align-items: center;
 
-                img{
+                img {
                     width: 50px;
                     height: 50px;
                     border-radius: 50%;
                     object-fit: cover;
                 }
-                
-                .avatar{
+
+                .avatar {
                     visibility: hidden;
                     display: none;
                 }
 
-                label{
+                label {
                     cursor: pointer;
                     display: flex;
                     align-items: center;
@@ -115,8 +115,52 @@
             margin-top: 24px;
             font-size: 14px;
 
-            a{
+            a {
                 cursor: pointer;
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 1050px) {
+    .loginContainer {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        .inner-container {
+            width: 90%;
+            margin: 0;
+
+            .login-box {
+                height: 500px;
+
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .loginContainer {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        .heroImg {
+            width: 400px;
+            margin-top: 25rem;
+        }
+
+        .inner-container {
+            width: 450px;
+            margin-left: 20rem;
+
+            .login-box {
+                height: 500px;
+
             }
         }
     }
