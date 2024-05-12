@@ -11,7 +11,6 @@ const ChatApp = () => {
         <div className='container'>
             <List />
             {chatId && <Chat />}
-            {chatId && <Detail />}
         </div>
     )
 }

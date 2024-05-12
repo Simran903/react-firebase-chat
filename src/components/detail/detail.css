@@ -1,7 +1,7 @@
-.detail{
+.detail {
     flex: 1;
 
-    .user{
+    .user {
         padding: 20px 20px;
         display: flex;
         flex-direction: column;
@@ -10,37 +10,43 @@
         border-bottom: 1px solid #dddddd35;
         color: white;
 
-        img{
+        img {
             width: 50px;
             height: 50px;
             border-radius: 50%;
             object-fit: cover;
         }
 
-        h2{
+        h2 {
             font-size: 25px;
         }
 
-        p{
+        p {
             font-size: 14px;
+        }
+
+        .backArrow {
+            font-size: 24px;
+            cursor: pointer;
+            align-self: start;
         }
     }
 
-    .info{
+    .info {
         padding: 20px;
         display: flex;
         flex-direction: column;
         gap: 5px;
 
-        .option{
+        .option {
 
-            .title{
+            .title {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
                 color: white;
 
-                img{
+                img {
                     width: 30px;
                     height: 30px;
                     background-color: rgba(17, 25, 40, 0.3);
@@ -50,37 +56,37 @@
                 }
             }
 
-            .photos{
+            .photos {
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
                 margin-top: 5px;
-                
-                .photoItem{
+
+                .photoItem {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
 
-                    .photoDetail{
+                    .photoDetail {
                         display: flex;
                         align-items: center;
                         gap: 20px;
 
-                        img{
+                        img {
                             width: 40px;
                             height: 40px;
                             border-radius: 5px;
                             object-fit: fill;
                         }
 
-                        span{
+                        span {
                             font-size: 11px;
                             font-weight: 300;
                             color: lightgray;
                         }
                     }
 
-                    .icon{
+                    .icon {
                         width: 30px;
                         height: 30px;
                         cursor: pointer;
@@ -90,23 +96,24 @@
                     }
                 }
 
-                
+
             }
 
         }
-        button{
+
+        button {
             padding: 10px 20px;
             color: white;
-            background-color: rgba(230, 74,105, 0.553);
+            background-color: rgba(230, 74, 105, 0.553);
             border: none;
             border-radius: 5px;
             cursor: pointer;
 
-            &:hover{
-                background-color: rgba(220, 20 ,60, 0.796);
+            &:hover {
+                background-color: rgba(220, 20, 60, 0.796);
             }
 
-            &.logOut{
+            &.logOut {
                 padding: 10px;
                 background-color: #1a73e8;
             }

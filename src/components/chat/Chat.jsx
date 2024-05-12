@@ -13,6 +13,7 @@ import {
 import { db } from "../../lib/firebase";
 import useChatStore from "../../lib/chatStore";
 import upload from "../../lib/upload";
+import Detail from "../detail/Detail";
 
 const Chat = () => {
   const [chat, setChat] = useState();
@@ -22,6 +23,7 @@ const Chat = () => {
     file: null,
     url: "",
   });
+  const [showDetails, setShowDetails] = useState(false); // State to control showing Detail component
   const { chatId, user, isCurrentUserBlocked, isReceiverBlocked } = useChatStore();
   const { currentUser } = useUserStore();
 
@@ -138,101 +140,106 @@ const Chat = () => {
       return `${diffMins} mins ago`;
     }
   };
-  
 
   return (
-    <div className="chat">
-      <div className="top">
-        <div className="user">
-          <img src={user?.avatar || "./avatar.png"} alt="" />
-          <div className="texts">
-            <span style={{ color: color }}>{user?.username}</span>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-          </div>
-        </div>
-        <div className="icons">
-          <img src="./phone.png" alt="" />
-          <img src="./video.png" alt="" />
-          <img src="./info.png" alt="" />
-        </div>
-      </div>
-
-      <div className="center">
-        {chat?.messages?.map((message) => (
-          ((!isCurrentUserBlocked && !isReceiverBlocked) || message.senderId === currentUser.id) && (
-            <div
-              className={
-                message.senderId === currentUser?.id ? "message own" : "message"
-              }
-              key={message?.createdAt}
-            >
-              <div className="text">
-                {message?.img && <img src={message?.img} alt="" />}
-                <p style={{ backgroundColor: color }}>{message.text}</p>
-                <span>{formatTime(message?.createdAt)}</span> {/* Use formatTime function */}
+    <>
+      {showDetails ? (
+        <Detail /> // Render Detail component when showDetails is true
+      ) : (
+        <div className="chat">
+          <div className="top">
+            <div className="user">
+              <img src={user?.avatar || "./avatar.png"} alt="" />
+              <div className="texts">
+                <span style={{ color: color }}>{user?.username}</span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
               </div>
             </div>
-          )
-        ))}
-        {img.url && (
-          <div className="message own">
-            <div className="text">
-              <img src={img.url} alt="" />
+            <div className="icons">
+              <img src="./phone.png" alt="" />
+              <img src="./video.png" alt="" />
+              <img src="./info.png" alt="" onClick={() => setShowDetails(true)} /> {/* Set showDetails to true when clicked */}
             </div>
           </div>
-        )}
 
-        <div ref={endRef}></div>
-      </div>
+          <div className="center">
+            {chat?.messages?.map((message) => (
+              ((!isCurrentUserBlocked && !isReceiverBlocked) || message.senderId === currentUser.id) && (
+                <div
+                  className={
+                    message.senderId === currentUser?.id ? "message own" : "message"
+                  }
+                  key={message?.createdAt}
+                >
+                  <div className="text">
+                    {message?.img && <img src={message?.img} alt="" />}
+                    <p style={{ backgroundColor: color }}>{message.text}</p>
+                    <span>{formatTime(message?.createdAt)}</span> {/* Use formatTime function */}
+                  </div>
+                </div>
+              )
+            ))}
+            {img.url && (
+              <div className="message own">
+                <div className="text">
+                  <img src={img.url} alt="" />
+                </div>
+              </div>
+            )}
 
-      <div className="bottom">
-        <div className="icons">
-          <label htmlFor="file">
-            <img src="./img.png" alt="" />
-          </label>
-          <input
-            type="file"
-            id="file"
-            style={{ display: "none" }}
-            onChange={handleImage}
-          />
-          <img src="./camera.png" alt="" />
-          <img src="./mic.png" alt="" />
-        </div>
-        <input
-          type="text"
-          placeholder={(isCurrentUserBlocked || isReceiverBlocked) ? "You cannot send a message" : "Type a message..."}
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          disabled={isCurrentUserBlocked || isReceiverBlocked}
-        />
-        <input
-          type="color"
-          value={color}
-          onChange={handleColorChange}
-          name="color"
-          id="color"
-          className="colorPicker"
-        />
-        <label htmlFor="color">
-          <AiOutlineBgColors className="colorIcon" />
-        </label>
-        <div className="emoji">
-          <img
-            src="./emoji.png"
-            alt=""
-            onClick={() => setOpen((prev) => !prev)}
-          />
-          <div className="picker">
-            <EmojiPicker open={open} onEmojiClick={handleEmoji} />
+            <div ref={endRef}></div>
+          </div>
+
+          <div className="bottom">
+            <div className="icons">
+              <label htmlFor="file">
+                <img src="./img.png" alt="" />
+              </label>
+              <input
+                type="file"
+                id="file"
+                style={{ display: "none" }}
+                onChange={handleImage}
+              />
+              <img src="./camera.png" alt="" />
+              <img src="./mic.png" alt="" />
+            </div>
+            <input
+              type="text"
+              placeholder={(isCurrentUserBlocked || isReceiverBlocked) ? "You cannot send a message" : "Type a message..."}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              disabled={isCurrentUserBlocked || isReceiverBlocked}
+            />
+            <input
+              type="color"
+              value={color}
+              onChange={handleColorChange}
+              name="color"
+              id="color"
+              className="colorPicker"
+            />
+            <label htmlFor="color">
+              <AiOutlineBgColors className="colorIcon" />
+            </label>
+            <div className="emoji">
+              <img
+                src="./emoji.png"
+                alt=""
+                onClick={() => setOpen((prev) => !prev)}
+              />
+              <div className="picker">
+                <EmojiPicker open={open} onEmojiClick={handleEmoji} />
+              </div>
+            </div>
+            <button className="sendButton" onClick={handleSend} disabled={isCurrentUserBlocked || isReceiverBlocked}>
+              Send
+            </button>
           </div>
         </div>
-        <button className="sendButton" onClick={handleSend} disabled={isCurrentUserBlocked || isReceiverBlocked}>
-          Send
-        </button>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
-export default Chat
+export default Chat;
