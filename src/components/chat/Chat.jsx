@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./chat.css";
 import EmojiPicker from "emoji-picker-react";
 import { AiOutlineBgColors } from "react-icons/ai";
+import { VscArrowCircleLeft } from "react-icons/vsc";
 import useUserStore from "../../lib/userStore";
 import {
   arrayUnion,
@@ -14,6 +15,7 @@ import { db } from "../../lib/firebase";
 import useChatStore from "../../lib/chatStore";
 import upload from "../../lib/upload";
 import Detail from "../detail/Detail";
+import List from "../list/List";
 
 const Chat = () => {
   const [chat, setChat] = useState();
@@ -23,7 +25,8 @@ const Chat = () => {
     file: null,
     url: "",
   });
-  const [showDetails, setShowDetails] = useState(false); // State to control showing Detail component
+  const [showDetails, setShowDetails] = useState(false);
+  const [showChatList, setShowChatList] = useState(false); // State to control showing List component
   const { chatId, user, isCurrentUserBlocked, isReceiverBlocked } = useChatStore();
   const { currentUser } = useUserStore();
 
@@ -66,7 +69,7 @@ const Chat = () => {
 
   const handleColorChange = (e) => {
     setColor(e.target.value);
-    localStorage.setItem("chatColor", e.target.value); // Save color to local storage
+    localStorage.setItem("chatColor", e.target.value); // Saving color to local storage
   };
 
   const handleSend = async () => {
@@ -121,9 +124,9 @@ const Chat = () => {
   };
 
   const formatTime = (timestamp) => {
-    if (!timestamp) return ""; // Return empty string if timestamp is undefined or null
+    if (!timestamp) return "";
   
-    // Convert Firestore timestamp to JavaScript Date object
+    // Converting Firestore timestamp to JavaScript Date object
     const date = timestamp.toDate();
     const now = new Date();
   
@@ -141,14 +144,23 @@ const Chat = () => {
     }
   };
 
+  const handleBack = () => {
+    setShowChatList(true);
+  };
+
+  if (showChatList) {
+    return <List />;
+  }
+
   return (
     <>
       {showDetails ? (
-        <Detail /> // Render Detail component when showDetails is true
+        <Detail />
       ) : (
         <div className="chat">
           <div className="top">
             <div className="user">
+              <VscArrowCircleLeft className="backArrow" onClick={handleBack} />
               <img src={user?.avatar || "./avatar.png"} alt="" />
               <div className="texts">
                 <span style={{ color: color }}>{user?.username}</span>
@@ -158,7 +170,7 @@ const Chat = () => {
             <div className="icons">
               <img src="./phone.png" alt="" />
               <img src="./video.png" alt="" />
-              <img src="./info.png" alt="" onClick={() => setShowDetails(true)} /> {/* Set showDetails to true when clicked */}
+              <img src="./info.png" alt="" onClick={() => setShowDetails(true)} />
             </div>
           </div>
 
@@ -174,7 +186,7 @@ const Chat = () => {
                   <div className="text">
                     {message?.img && <img src={message?.img} alt="" />}
                     <p style={{ backgroundColor: color }}>{message.text}</p>
-                    <span>{formatTime(message?.createdAt)}</span> {/* Use formatTime function */}
+                    <span>{formatTime(message?.createdAt)}</span>
                   </div>
                 </div>
               )

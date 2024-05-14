@@ -9,7 +9,7 @@ const ChatApp = () => {
     
     return (
         <div className='container'>
-            {/* <List /> */}
+            <List />
             {chatId && <Chat />}
         </div>
     )
