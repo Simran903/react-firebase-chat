@@ -48,18 +48,18 @@
             display: flex;
             gap: 20px;
             position: relative;
-        }
 
-        img {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
+            img {
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+            }
         }
     }
 
     .center {
-        padding: 20px;
         flex: 1;
+        padding: 20px;
         overflow-y: scroll;
         display: flex;
         flex-direction: column;
@@ -127,18 +127,15 @@
         border-top: 1px solid #dddddd35;
         gap: 20px;
 
-        margin-top: auto;
-
         .icons {
             display: flex;
             gap: 20px;
             position: relative;
-        }
 
-        img {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
+            img {
+                width: 20px;
+                height: 20px;
+            }
         }
 
         input {
@@ -180,11 +177,15 @@
         .emoji {
             position: relative;
 
+            img {
+                width: 26px;
+                height: 26px;
+            }
+
             .picker {
                 position: absolute;
                 bottom: 50px;
-                left: -250px;
-
+                left: -235px;
             }
         }
 
@@ -195,11 +196,96 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: 600;
 
             &:disabled{
                 background-color: #5182feb4;
                 cursor: not-allowed;
             }
+        }
+    }
+}
+
+/* Media Query for Small Devices */
+@media only screen and (max-width: 768px) {
+    .chat {
+        .top {
+
+            .user {
+                gap: 8px;
+
+                img {
+                    width: 40px;
+                    height: 40px;
+                }
+
+                .texts {
+
+                    span {
+                        font-size: 20px;
+                    }
+
+                    p {
+                        display: none;
+
+                    }
+                }
+            }
+
+            .icons {
+                gap: 10px;
+
+                img {
+                    width: 14px;
+                    height: 14px;
+                }
+            }
+        }
+
+        .center {
+            padding: 15px;
+
+            .message {
+                max-width: 70%;
+
+                img {
+                    width: 25px;
+                    height: 25px;
+                }
+
+                .text {
+                    p {
+                        padding: 10px;
+                    }
+
+                    span {
+                        font-size: 8px;
+                    }
+                }
+            }
+        }
+
+        .bottom {
+            padding: 15px 8px;
+
+            .icons {
+                display: none;
+            }
+
+            input {
+                padding: 12px;
+            }
+
+            .colorIcon {
+                display: none;
+            }
+
+            .emoji{
+                img{
+                    width: 24px;
+                }
+            }
+
         }
     }
 }
