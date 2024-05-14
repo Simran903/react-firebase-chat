@@ -47,7 +47,7 @@
         .icons {
             display: flex;
             gap: 20px;
-            position: relative; /* Added */
+            position: relative;
         }
 
         img {
@@ -132,7 +132,7 @@
         .icons {
             display: flex;
             gap: 20px;
-            position: relative; /* Added */
+            position: relative;
         }
 
         img {
@@ -159,9 +159,9 @@
             visibility: hidden;
             position: absolute;
             bottom: 50px;
-            left: 60%;
-            background-color: white; /* Added for better visibility */
-            padding: 10px; /* Added for better visibility */
+            left: 80%;
+            background-color: white;
+            padding: 10px;
           }
       
           label {
@@ -183,7 +183,7 @@
             .picker {
                 position: absolute;
                 bottom: 50px;
-                left: 0;
+                left: -250px;
 
             }
         }
