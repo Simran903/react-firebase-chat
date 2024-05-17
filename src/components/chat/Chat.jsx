@@ -144,14 +144,6 @@ const Chat = () => {
     }
   };
 
-  const handleBack = () => {
-    setShowChatList(true);
-  };
-
-  if (showChatList) {
-    return <List />;
-  }
-
   return (
     <>
       {showDetails ? (
@@ -160,7 +152,7 @@ const Chat = () => {
         <div className="chat">
           <div className="top">
             <div className="user">
-              <VscArrowCircleLeft className="backArrow" onClick={handleBack} />
+              <VscArrowCircleLeft className="backArrow" />
               <img src={user?.avatar || "./avatar.png"} alt="" />
               <div className="texts">
                 <span style={{ color: color }}>{user?.username}</span>
