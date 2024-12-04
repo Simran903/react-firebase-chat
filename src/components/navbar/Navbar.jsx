@@ -1,63 +1,61 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import "./navbar.css";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-    const [show, setShow] = useState("top") // for scrolling effect
-    const [lastScrollY, setLastScrollY] = useState(0) // for scrolling effect
-    const navigate = useNavigate() // for navigation
-    const location = useLocation() // for location
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [location])
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
-    useEffect(() => {
-        window.addEventListener("scroll", controlNavbar)
-        return () => {
-            window.removeEventListener("scroll", controlNavbar)
-        }
-    }, [lastScrollY])
+  const navigationHandler = (path) => {
+    navigate(path);
+    setIsSidebarOpen(false);
+  };
 
-    const controlNavbar = () => {
-        if (window.scrollY > 200) {
-            if (window.scrollY > lastScrollY) {
-                setShow("hide")
-            } else {
-                setShow("top")
-            }
-            setLastScrollY(window.scrollY)
-        }
-    }
+  return (
+    <header className="fixed w-full px-6 py-4 z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+      {/* Hamburger Button */}
+      <button
+        className="text-white text-3xl hover:text-primary-a40 duration-300"
+        onClick={toggleSidebar}
+      >
+        ☰
+      </button>
 
-    const navigationHandler = (type) => {
-        if (type === "login") {
-          navigate("login")
-        }
-        else {
-          navigate("register")
-        }
-      }
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full w-64 bg-surface-a0 text-white shadow-lg transform transition-transform duration-300 ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        {/* Close Button */}
+        <button
+          className="text-white text-3xl absolute top-4 left-4 hover:text-primary-a40 duration-300"
+          onClick={toggleSidebar}
+        >
+          ✕
+        </button>
 
-    return (
-        <header className={`header ${show}`}>
-            <div className="logo" onClick={() => navigate("/")}>
-                <h2>ChitChat</h2>
-            </div>
-            <ul className="menuItems">
-                <li className="menuItem" onClick={() => navigationHandler("login")}>Log in</li>
-                <li className="menuItem" onClick={() => navigationHandler("register")}>Sign up</li>
+        {/* Sidebar Links */}
+        <ul className="mt-16 pt-5 space-y-6 px-6 h-[100vh] bg-surface-a0">
+          <li
+            className="cursor-pointer font-bold text-lg hover:text-primary-a40 duration-300"
+            onClick={() => navigationHandler("/login")}
+          >
+            Log in
+          </li>
+          <li
+            className="cursor-pointer font-bold text-lg hover:text-primary-a40 duration-300"
+            onClick={() => navigationHandler("/register")}
+          >
+            Sign up
+          </li>
+        </ul>
+      </div>
+    </header>
+  );
+};
 
-                <motion.div
-                    className="box"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                >
-                </motion.div>
-            </ul>
-        </header>
-    )
-}
-
-export default Header
+export default Header;
