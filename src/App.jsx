@@ -4,11 +4,11 @@ import Register from "./components/login/Register"
 import Header from "./components/navbar/Navbar"
 import Notification from "./components/notification/Notification"
 import ChatApp from "./pages/ChatApp"
-import Home from "./pages/home/Home"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { onAuthStateChanged } from "firebase/auth"
 import { auth } from "./lib/firebase"
 import useUserStore from "./lib/userStore"
+import { Home } from "./pages/home/Home"
 
 const App = () => {
 
