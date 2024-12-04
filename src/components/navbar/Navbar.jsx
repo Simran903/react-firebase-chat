@@ -44,7 +44,7 @@ const Header = () => {
             className="cursor-pointer font-bold text-lg hover:text-primary-a40 duration-300"
             onClick={() => navigationHandler("/login")}
           >
-            Log in
+            Sign in
           </li>
           <li
             className="cursor-pointer font-bold text-lg hover:text-primary-a40 duration-300"
