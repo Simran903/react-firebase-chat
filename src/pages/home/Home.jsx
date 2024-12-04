@@ -10,8 +10,8 @@ const Home = () => {
                 <div className="heading">
                     <h1>Talk to your Loved Ones, Make Friends!</h1>
                     <p>
-                        "Connect, chat, and explore endless conversations on our vibrant and
-                        welcoming platform!"
+                    &quot;Connect, chat, and explore endless conversations on our vibrant and
+                        welcoming platform!&quot;
                     </p>
                 </div>
             </div>
