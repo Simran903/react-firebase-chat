@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './detail.css';
+import { useNavigate } from "react-router-dom";
 import { auth, db } from '../../lib/firebase';
 import useUserStore from '../../lib/userStore';
 import useChatStore from '../../lib/chatStore';
@@ -10,6 +11,7 @@ import Chat from '../chat/Chat';
 
 const Detail = () => {
   const { currentUser } = useUserStore();
+  const navigate = useNavigate();
   const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, changeBlock } = useChatStore();
   const [showChat, setShowChat] = useState(false);
 

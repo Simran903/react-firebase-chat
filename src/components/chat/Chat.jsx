@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./chat.css";
 import EmojiPicker from "emoji-picker-react";
 import { AiOutlineBgColors } from "react-icons/ai";
@@ -15,7 +15,7 @@ import { db } from "../../lib/firebase";
 import useChatStore from "../../lib/chatStore";
 import upload from "../../lib/upload";
 import Detail from "../detail/Detail";
-import List from "../list/List";
+// import List from "../list/List";
 
 const Chat = () => {
   const [chat, setChat] = useState();
